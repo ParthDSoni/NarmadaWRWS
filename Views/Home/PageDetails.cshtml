@@ -1,0 +1,134 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@model CMSMenuMasterModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+
+}
+
+<!-- BreadCrumb Start -->
+<div class="ttm-page-title-row ttm-bg ttm-bgimage-yes ttm-bgcolor-darkgrey clearfix">
+    <div class="ttm-row-wrapper-bg-layer ttm-bg-layer"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="ttm-page-title-row-inner">
+                    <div class="breadcrumb-wrapper headersub">
+                        @{
+                            var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                            if (!string.IsNullOrWhiteSpace(stringData))
+                            {
+                                @Html.Raw(stringData)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BreadCrumb End -->
+
+@*
+<div class="service-details">
+    <div class="auto-container">
+
+        @if (Model.IsFullScreen == true)
+        {
+            <div class="row">
+                <div class="col-lg-12 content-area">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-9 col-sm-12 content-side">
+                                 @Html.Raw(Model.PageDescription)
+                            </div>
+                        </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-12 content-area">
+                        <div class="row clearfix">
+                            <div class="col-lg-9 col-md-9 col-sm-12 content-side">
+                                        @Html.Raw(Model.PageDescription)
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 sidebar-side">
+                                @{
+                                    var stringQuiData = Functions.GetQuickLink(Url, Context, LangId);
+                                    if (!string.IsNullOrWhiteSpace(stringQuiData))
+                                    {
+                                        @Html.Raw(stringQuiData)
+                                    }
+                                }
+                            </div>
+                        </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>*@
+
+<!-- page-title end-->
+<div class="site-main">
+    <div class="ttm-row sidebar ttm-sidebar-left clearfix">
+        <div class="container">
+            <div class="row">
+                @if (Model.IsFullScreen == true)
+                {
+                    <div class="col-lg-12" id="maincontent">
+                        <div class="ttm-service-single-content-area">
+                            <div class="ttm-service-description">
+                                @Html.Raw(Model.PageDescription)
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-4 widget-area sidebar-left">
+                        @{
+                            var stringQuiData = Functions.GetQuickLink(Url, Context, LangId);
+                            if (!string.IsNullOrWhiteSpace(stringQuiData))
+                            {
+                                @Html.Raw(stringQuiData)
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-12" id="maincontent">
+                        <div class="ttm-service-single-content-area">
+                            <div class="ttm-service-description">
+                                @Html.Raw(Model.PageDescription)
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var pagename = '@ViewBag.pagename';
+</script>
+
+
+

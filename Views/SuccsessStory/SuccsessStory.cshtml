@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Succsess Story";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!--sub-Banner-start-->
+<div class="sub-banner pt-20 pb-20">
+    <div class="container">
+        <div class="col-md-8  offset-md-2">
+            <div class="text-center text-line">
+                <h1>Success Story</h1>
+                <ul class="text-c">
+                    <li><a class="color-t" href="@Url.Content("~/Home/Index")">Home</a> </li>
+                    <li>|</li>
+                    <li class="color-t">Success Story</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--sub-Banner-End-->
+<!--Ser-details-start-->
+<section class="pt-65 pb-65 agents-list">
+    <div class="container">
+        <div class="row" id="SuccsessStoryArea">
+
+           @*<div class="col-md-4 col-lg-4">
+                <div class="item">
+                    <div class="min-text-us">
+                        <div class="con-text">
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                Ipsum
+                                has been the industry's standard dummy text ever since the 1500s, when an
+                                unknown
+                            </p>
+                        </div>
+                        <div class="user-test">
+                            <span>
+                                <img src="images/team1.jpg" alt="" class="img-fluid">
+                            </span>
+                            <div class="ri-test">
+                                <h4>User Name</h4>
+                                <p>Designation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+             
+        </div>
+
+    </div>
+</section>
+<!--Ser-details-End-->
+@section Scripts {
+    <script src="@Href("~/Users/js/SuccsessStory.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}

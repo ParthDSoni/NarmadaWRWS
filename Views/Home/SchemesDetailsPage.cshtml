@@ -1,0 +1,132 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@model NWRWS.Model.Service.BlogMasterModel
+@{
+    ViewData["Title"] = "Schemes Detail ";
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+<!-- page-title -->
+<div class="ttm-page-title-row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-box text-left">
+                    <div class="breadcrumb-wrapper">
+                        @* @{
+                        var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                        if (!string.IsNullOrWhiteSpace(stringData))
+                        {
+                        @Html.Raw(stringData)
+                        }
+                        }*@
+                        <span>
+                            <a title="Homepage" href="/Index"><i class="ti ti-home"></i>&nbsp;&nbsp;Home</a>
+                        </span>
+                        <span class="ttm-bread-sep ttm-textcolor-white">&nbsp; → &nbsp;</span>
+                        <span class="ttm-textcolor-skincolor">Schemes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hiddenBlogMasterId" value="@Model.BlogMasterId" />
+<!--site-main start-->
+<div class="site-main">
+    <!-- sidebar -->
+    <div class="sidebar ttm-sidebar ttm-bgcolor-white clearfix">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-lg-9 content-area" id="image">
+                   @* <article class="post ttm-blog-single clearfix">
+                        <div class="ttm-post-featured-wrapper">
+                            <div class="ttm-post-featured mb-30" id="image">                             
+                            </div>
+                        </div>
+                        <div class="ttm-blog-single-content">
+                            <div class="entry-content">
+                                <h5 class="schemsbg">Name Of the Schemes</h5>
+                                <div class="col-md-12">
+                                    <div class="">
+                                        <ul class="ttm-list ttm-list-style-icon">
+                                            <li>
+                                                <i class="fa fa-arrow-right ttm-textcolor-skincolor"></i>@Model.BlogName
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <br>                              
+                                <div>@Html.Raw(@Model.Description)</div>
+                                <div class="separator">
+                                    <div class="sep-line mt-25 mb-25"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>*@
+                    <!-- ttm-service-single-content-are end -->
+                </div>
+                <div class="col-lg-3 widget-area">
+                   @* <aside class="widget widget-search">
+                        <form role="search" method="get" class="search-form" action="#">
+                            <div class="form-group">
+                                <input name="search" type="text" class="form-control with-border"
+                                       placeholder="Search....">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </form>
+                    </aside>*@
+
+                    <aside class="widget post-widget">
+                        <h3 class="widget-title">Schemes</h3>
+                        <ul class="widget-post ttm-recent-post-list" id="LatestSchemeArea">
+                           @* <li>
+                                <a href="single-blog.html">
+                                    <img src="images/blog/post-01.jpg"
+                                         alt="post-img">
+                                </a>
+                                <a href="single-blog.html">Agriculture Beneficiary Schemes</a>
+                            </li>
+                            <li>
+                                <a href="single-blog.html">
+                                    <img src="images/blog/post-02.jpg"
+                                         alt="post-img">
+                                </a>
+                                <a href="single-blog.html">Horticulture Beneficiary Schemes</a>
+                            </li>*@
+                           
+                        </ul>
+                    </aside>
+                </div>
+            </div><!-- row end -->
+        </div>
+    </div>
+    <!-- sidebar end -->
+</div><!--site-main end-->
+
+@section Scripts {
+    <script src="@Href("~/ui/js/schema.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+   @* <script>
+        $(document).ready(function () {
+            var strpath = ResolveUrl("/ViewFile?fileName=" + GreateHashString("@Model.FilePath"));
+            document.getElementById("image").innerHTML = '<img src="' + strpath + '" alt="" class="img-fluid" height="900px" width="650px">';
+            
+        });
+        
+    </script>*@
+}

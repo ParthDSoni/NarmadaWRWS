@@ -1,0 +1,608 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+
+@{
+    ViewData["Title"] = "Index1";
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            dstweb.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+
+}
+
+<!-- start slider -->
+<div class="slider-area slider-layout1 bg-light-primary slider-top-margin">
+    <div class="bend niceties preview-1">
+        <div id="ensign-nivoslider-1" class="slides">
+            @*<img src="assets/images/slider/banner_1.jpg" alt="slider" title="#slider-direction-1" />
+            <!-- <img src="assets/images/slider/ConclaveBanner.jpg" alt="slider" title="#slider-direction-2" /> -->
+            <img src="assets/images/slider/banner_1.jpg" alt="slider" title="#slider-direction-3" />*@
+        </div>
+    </div>
+</div>
+<!-- End Slider -->
+<!-- Slider Area End Here -->
+<div class="subscribe-section mt-20 " id="skipdata">
+    <div class="container-fluid">
+        <div class="acme-news-ticker">
+            <div class="row">
+                <div class="col-md-2 col-lg-2">
+                    <div class="acme-news-ticker-label breaking-caret">
+                        <span class="font-weight-bold">Announcement</span>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-9  py-2">
+                    <div class="breaking-box">
+                        <div id="carouselbreaking" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner" id="dvAnnouncements">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 col-lg-1">
+                    <div class="navigation-box acme-news-ticker-controls">
+                        <a class="carousel-control-prev text-primary" href="#carouselbreaking" role="button"
+                           data-slide="prev">
+                            <i class="fas fa-angle-left" aria-hidden="true"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next text-primary" href="#carouselbreaking" role="button"
+                           data-slide="next">
+                            <i class="fas fa-angle-right" aria-hidden="true"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Minister master and News section -->
+<section class="team-section  pt-50 " style="background:url('@Href("~/ui/images/gallery-bg.png")');" id="maincontent">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-md-12 col-lg-5 col-sm-12 col-xs-12">
+
+                <div class="blog-details-content">
+                    <div class="minsters flex">
+                        <div class="small-img" id="dvminister">                      
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="author-box">
+                        <figure class="author-image"><img src="ui/images/vijaynehra-ias.png" alt=""></figure>
+                        <div class="inner">
+                            <div class="author-info">
+                                <h4>Shri Vijay Nehra, IAS</h4>
+                                <p><a href="#">Secretary - DST,</a></p>
+                                <p>Government of Gujarat</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 sidebar-page-container">
+                <div class="sidebar">
+                    <div class="sidebar-widget sidebar-post">
+                        <div class="widget-title">
+                            <h3>Recent Updates</h3>
+                            <div class="em_bar">
+                                <div class="em_bar_bg"></div>
+                            </div>
+                        </div>
+                        <div class="post-inner">
+                            <div class="carousel-inner-data">
+                                <ul>
+                                    <li>
+                                        <div class="post">
+                                            <div class="post-date">
+                                                <p>06</p><span>july</span>
+                                            </div>
+                                            <div class="file-box">
+                                                <i class="far fa-folder-open"></i>
+                                                <p>Subject</p>
+                                            </div>
+                                            <h5>
+                                                <a href="#">
+                                                    DST Circular dated 06.07.2020 regarding Usage of
+                                                    Software base Video Conferencing service.
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post">
+                                            <div class="post-date">
+                                                <p>25</p><span>April</span>
+                                            </div>
+                                            <div class="file-box">
+                                                <i class="far fa-folder-open"></i>
+                                                <p>Subject</p>
+                                            </div>
+                                            <h5>
+                                                <a href="#">
+                                                    DST Circular dated 25/04/2020 regarding Usage of the
+                                                    online conferencing tool.
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post">
+                                            <div class="post-date">
+                                                <p>05</p><span>Jan</span>
+                                            </div>
+                                            <div class="file-box">
+                                                <i class="far fa-folder-open"></i>
+                                                <p>Subject</p>
+                                            </div>
+                                            <h5>
+                                                <a href="#">
+                                                    Town wise availability of the Hotspots and its Access
+                                                    Points under Urban Wi-Fi project of Department of Science and
+                                                    Technology, Govt. of Gujarat.
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="post">
+                                            <div class="post-date">
+                                                <p>06</p><span>July</span>
+                                            </div>
+                                            <div class="file-box">
+                                                <i class="far fa-folder-open"></i>
+                                                <p>Subject</p>
+                                            </div>
+                                            <h5>
+                                                <a href="#">
+                                                    DST Circular dated 06.07.2020 regarding Usage of
+                                                    Software base Video Conferencing service.
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Wellcome science and technologies -->
+<div class="hs_sign_main_wrapper">
+    <div class="shape-feature d-none d-xl-block">
+        <img src="@Href("~/ui/images/shape-18.png")" alt="feature-thumb" class="shape-1">
+    </div>
+    <div class="container">
+        <div class="hs_sign_heading_wrapper text_center ">
+            <div class="hs_about_heading_main_wrapper">
+                <div class="hs_about_heading_wrapper">
+                    <h2>Welcome to Department of <span>Science & Technology, Gujarat</span></h2>
+                    <div class="em_bar">
+                        <div class="em_bar_bg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hs_sign_left_wrapper">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_border_wrapper1">
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/dept_dit.jpg")">
+                            <i class="flaticon-aries-sign"></i>
+                        </div>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="directorate_of_ict.html" class="hs_tabs_btn">
+                                        Directorate of ICT &
+                                        e-Governance
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_wrapper_2 hs_sign_left_tabs_border_wrapper2">
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/gil.png")">
+                            <i class="flaticon-taurus-astrological-sign-symbol"></i>
+                        </div>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="gil.html" target="_blank" class="hs_tabs_btn">
+                                        Gujarat Informatics
+                                        Limited
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_wrapper_2 hs_sign_left_tabs_border_wrapper3">
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/depat_sciencecity.jpg")">
+                            <i class="flaticon-gemini-zodiac-sign-symbol"></i>
+                        </div>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="science_city.html" class="hs_tabs_btn">
+                                        Gujarat Council of Science
+                                        City
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_wrapper_2 hs_sign_left_tabs_border_wrapper4">
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/depat_gcst.jpg")">
+                            <i class="flaticon-cancer"></i>
+                        </div>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="gcst.html" class="hs_tabs_btn">
+                                        Gujarat Council of Science &
+                                        Technology
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_wrapper_2 hs_sign_left_tabs_border_wrapper6">
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/gsem.jpg")">
+                            <i class="flaticon-cancer"></i>
+                        </div>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="gcst.html" class="hs_tabs_btn">Gujarat State Electronics Mission</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hs_sign_center_wrapper visible-xs visible-sm">
+            <div class="hs_cycle_main_wrapper">
+                <div class="hs_cycle_img">
+                    <img src="@Href("~/ui/images/cycle.jpg")" alt="circle_img">
+                    <span class="pulse"></span>
+                    <div class="hs_tab_shap1">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-taurus-astrological-sign-symbol"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap2">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-aries-sign"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap3">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-libra"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap4">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_4" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-scorpio"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap5">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_5" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-leo"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap6">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_6" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-capricorn"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap7">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_7" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-aquarius-zodiac-sign-symbol"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap8">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_8" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-gemini-zodiac-sign-symbol"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap9">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_9" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-virgo-astrological-symbol-sign"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap10">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_10" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-leo"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap11">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_11" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-cancer"></i></p>
+                        </a>
+                    </div>
+                    <div class="hs_tab_shap12">
+                        <a href="#">
+                            <svg version="1.1" id="Layer_12" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="68.811px"
+                                 height="64.729px" viewBox="0 0 68.811 64.729"
+                                 enable-background="new 0 0 68.811 64.729" xml:space="preserve">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0,52.763c0,0,26.125,0.367,42.664,11.967l26.147-46.796
+                            							c0,0-30.278-18.234-68.054-17.929L0,52.763z" />
+                                </svg>
+                            <p><i class="flaticon-gemini-zodiac-sign-symbol"></i></p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="hs_sign_right_wrapper hidden-xs">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_right_tabs_border_wrapper1">
+                        <span></span>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="gsbtm.html" class="hs_tabs_btn">
+                                        Gujarat State Bio Technology
+                                        Mission
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/gsbtm.png")">
+                            <i class="flaticon-libra"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_wrapper_2 hs_sign_right_tabs_border_wrapper2">
+                        <span></span>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="isr.html" class="hs_tabs_btn">Institute of Seismological Research</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/dept_isr.png")">
+                            <i class="flaticon-scorpio"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_wrapper_2 hs_sign_right_tabs_border_wrapper3">
+                        <span></span>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="info_gfgnl.html" class="hs_tabs_btn">
+                                        Gujarat Fibre Grid Network
+                                        Limited
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/fiber.png")">
+                            <i class="flaticon-sagittarius-arrow-sign"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_wrapper_2 hs_sign_right_tabs_border_wrapper4">
+                        <span></span>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li><a href="#" class="hs_tabs_btn">Gujarat Biotechnology Research Centre</a></li>
+                            </ul>
+                        </div>
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/dept_gbrc.jpg")">
+                            <i class="flaticon-capricorn"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_sign_left_tabs_wrapper hs_sign_right_tabs_border_wrapper6">
+                        <span></span>
+                        <div class="hs_slider_tabs_icon_cont_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="gsbtm.html" class="hs_tabs_btn">
+                                        Savli Technology & Business
+                                        Incubator
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hs_slider_tabs_icon_wrapper">
+                            <img src="@Href("~/ui/images/savli.png")">
+                            <i class="flaticon-libra"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="clear"></div>
+
+<!-- Projects  -->
+<section class="case-style-two pt-50 pb-25 bg-color-1"
+         style="background:url('@Href("~/ui/images/slider-bg-img.jpg)"))' no-repeat center center / cover ;">
+    <div class="auto-container" id="divProjects">        
+    </div>
+</section>
+
+<div class="clear"></div>
+
+<!-- Policies -->
+<section class="service-section-five pt-50 pb-50">
+    <div class="auto-container" id="divPolicy">        
+    </div>
+</section>
+
+
+
+
+<!-- Logo -->
+<div class="logo-area two  pt-25 pb-25">
+    <div class="container">
+        <div class="logo-slider owl-theme owl-carousel owl-dots-none owl-nav-none" id="BrandLogos">
+        </div>
+    </div>
+</div>
+<!-- Logo -->
+<!-- End Logo -->
+
+<div class="modal fade text-left" id="mdlFront" role="dialog" aria-labelledby="myModalLabel9" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="margin-top:30px!important;">
+        <div class="modal-content">
+            <div class="modal-header  bgmodalcol">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="DivDescriptionPopup">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+
+    <script src="@Href("~/ui/js/PageDetails/Index1.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+    <script src="@Href("~/Admin/js/PageDetails/FrontGallery/Album.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+
+}

@@ -1,0 +1,119 @@
+﻿@model NWRWS.Webs.Models.ContactUsViewModel
+@{
+    ViewData["Title"] = "ContactUs Page";
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+}
+
+      
+<!--sub-Banner-start-->
+<div class="sub-banner pt-20 pb-20">
+    <div class="container">
+        <div class="col-md-8  offset-md-2">
+            <div class="text-center text-line">
+                <h1>Contact Us</h1>
+                <ul class="text-c">
+                    <li><a class="color-t" href="/Home/Index">Home</a> </li>
+                    <li>|</li>
+                    <li class="color-t">Contact Us</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--sub-Banner-End-->
+<!--Contact Us -Start-->
+<section class="pt-90 pb-90 contact-page-det">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="contact-page">
+                    <div class="heading-t  fadeInUp animated">
+                        <h2>Contact Us</h2>
+                        <p>Reach Out to us For any Inquiry</p>
+                    </div>
+                    <div class="comment-re post-com">
+                        
+                            <form asp-action="ContactUs" asp-controller="Home" method="post" class="row">
+                            <div class="form-group col-md-6">
+                                <input type="text" asp-for="Name" class="form-control form-com" placeholder="Enter Your Name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" asp-for="Email" class="form-control form-com" placeholder="Enter Your Email">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="tel" asp-for="PhoneNumber" class="form-control form-com" placeholder="Enter Contact No" onkeypress="return isNumberKey(event)" maxlength="10">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" placeholder="Subject" name="Subject"
+                                       class="form-control form-com">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <textarea class="form-control form-com-message " rows="10" cols="50" asp-for="Address" id="address" placeholder="Message"></textarea>
+                                
+                            </div>
+                            <div class="col-md-12">
+                                <button class="animation-cer-btn" id="my-form-button" type="submit">
+                                    Send Message<span class="line2"></span>
+                                </button>
+                                <p id="my-form-status-contact"></p>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-5 pl-80">
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.951887136708!2d72.59641131428323!3d23.06222542063366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8409739be111%3A0xfc46b92d8da7c07e!2s3%2C%20Duffnala%2C%20Ahmedabad%20Cantonment%2C%20Ahmedabad%2C%20Gujarat%20380004!5e0!3m2!1sen!2sin!4v1669096965516!5m2!1sen!2sin"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Contact Us -End-->
+<!--Address - Start-->
+<section class="pt-60 pb-60 gray-bg">
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-md-4">
+                <div class="add-con">
+                    <span>
+                        <img src="images/b-mail.png" alt="" class="img-fluid" />
+                    </span>
+                    <ul>
+                        <li>info@example.com</li>
+                        <li>info@example.com</li>
+                    </ul>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-4">
+                <div class="add-con">
+                    <span>
+                        <img src="images/b-call.png" alt="" class="img-fluid" />
+                    </span>
+                    <ul>
+                        <li>+91 0987654321</li>
+                        <li>+1 1234567890</li>
+                    </ul>
+                </div>
+            </div> -->
+            <div class="col-md-4">
+                <div class="add-con">
+                    <span>
+                        <img src="~/Guser/img/b-map.png" alt="" class="img-fluid" />
+                    </span>
+                    <ul>
+                        <li>
+                            BUNGLOW No. 3, DAFFNALA, SHAHIBAUG, AHMEDABAD-380004, GUJARAT
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Address - End-->
+<!--Footer Start-->

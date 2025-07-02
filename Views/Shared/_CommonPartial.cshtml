@@ -1,0 +1,154 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@{
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+
+<!-- BREADCRUMB AREA START -->
+<div class="ttm-page-title-row ttm-bg ttm-bgimage-yes ttm-bgcolor-darkgrey clearfix">
+    <div class="ttm-row-wrapper-bg-layer ttm-bg-layer"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="ttm-page-title-row-inner">
+                    <div class="breadcrumb-wrapper headersub">
+                        @{
+                            var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                            if (!string.IsNullOrWhiteSpace(stringData))
+                            {
+                                @Html.Raw(stringData)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BREADCRUMB AREA END -->
+<!-- Main Content -->
+<div class="site-main">
+    <div class="ttm-row sidebar ttm-sidebar-left clearfix">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Filter Form -->
+                <div class="col-lg-4 widget-area sidebar-left">
+                    @* <aside class="widget widget-nav-menu"> *@
+                    <aside>
+                        <form id="frmAddData" class="request_qoute_form wrap-form clearfix" method="post" novalidate="novalidate">
+                            <input type="hidden" name="AntiforgeryFieldname" value="YOUR_CSRF_TOKEN_HERE" />
+
+                            <!-- Dams -->
+                            <div class="firstsearch widget widget-nav-menu mb-2">
+                                <div class="col-md-12">
+                                    <div class="titlesearch">
+                                        <h5>Dams of Gujarat</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="DRegionId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="DBasinId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="DamId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-6 mx-auto">
+                                    <button type="button" class="submit ttm-btn ttm-btn-size-md ttm-btn-shape-rounded ttm-btn-style-fill ttm-btn-color-skincolor w-100 margin_top5" id="DamBtn">Search</button>
+                                </div>
+                            </div>
+
+                            <!-- Rivers -->
+                            <div class="firstsearch widget widget-nav-menu mb-2">
+                                <div class="col-md-12">
+                                    <div class="titlesearch">
+                                        <h5>Rivers of Gujarat</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="RRegionId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="RBasinId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="RiverId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-6 mx-auto">
+                                    <button type="button" class="submit ttm-btn ttm-btn-size-md ttm-btn-shape-rounded ttm-btn-style-fill ttm-btn-color-skincolor w-100 margin_top5" id="RiverBtn">Search</button>
+                                </div>
+                            </div>
+
+                            <!-- Canals -->
+                            <div class="firstsearch widget widget-nav-menu mb-2">
+                                <div class="col-md-12">
+                                    <div class="titlesearch">
+                                        <h5>Canals of Gujarat</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="CRegionId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="text-input">
+                                        <select class="form-select" id="CanalId"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-6 mx-auto">
+                                    <button type="button" class="submit ttm-btn ttm-btn-size-md ttm-btn-shape-rounded ttm-btn-style-fill ttm-btn-color-skincolor w-100 margin_top5" id="CanalBtn">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </aside>
+                </div>
+
+                <!-- Table & Detail Area -->
+                <div class="col-lg-8 content-area">
+                    <div class="col-lg-12 col-md-12 p-0 m-0">
+                        <section class="ttm-row conatct-section  clearfix border-rad_5 pb-5" style="padding-top: 0px;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="ttm-bgcolor-white border-rad_5 grtable">
+                                            <div class="responsive" id="MainContentId">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,246 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+
+@{
+    ViewData["Title"] = "Advertisement";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            GSSSB.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+
+}
+
+<style>
+    .sessions li.active::before {
+        background: #004953;
+    }
+</style>
+
+<div class="blog-details-area pt-20 pb-50">
+    <div class="container-fluid">
+        <div class="content_newdata">
+            <div class="container">
+                <div class="section-main-title">
+                    <h4>Departmental Exam </h4>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <input type="text" name="txtSearch" id="txtSearch" placeholder="Search" required="" aria-required="true"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select class="form-control" id="ddlExam" name="ddlExam">
+                            <option>OPEN EXAM</option>
+                            <option>SEMI DIRECT EXAM</option>
+                            <option>DEPARTMENTAL EXAM</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <button class="btn common-btn" type="submit" id="btnSearch" name="submit-form">Submit</button>
+                    </div>
+                </div>
+                <div class="row" id="dvContent">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="cards__item mt-20">
+                            <div class="card">
+                                <div class="card__content">
+                                    <div class="card__title">Open Exam</div>
+                                    <div class="container">
+                                        <div class="wrapper-content">
+                                            <h5> જા.ક્ર. ૧૮૭/૨૦૨૦-૨૧, સબ ઈન્સ્પેક્ટર ઈન્સ્ટ્રક્ટર, વર્ગ-૩</h5>
+                                            <ul class="sessions">
+                                                <li class="active">
+                                                    <div class="time">12/10/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Notification
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">21/10/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">28/12/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Revised Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">16/01/2023</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Examination Rules
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="cards__item mt-20">
+                            <div class="card">
+                                <div class="card__content">
+                                    <div class="card__title">Semi Direct Exam</div>
+                                    <div class="container">
+                                        <div class="wrapper-content">
+                                            <h5> જા.ક્ર. ૧૮૭/૨૦૨૦-૨૧, સબ ઈન્સ્પેક્ટર ઈન્સ્ટ્રક્ટર, વર્ગ-૩</h5>
+                                            <ul class="sessions">
+                                                <li>
+                                                    <div class="time">12/10/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Notification
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="active">
+                                                    <div class="time">21/10/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">28/12/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Revised Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">16/01/2023</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Examination Rules
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">18/01/2023</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Revised-Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">18/02/2023</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Provisional Answer Key
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="cards__item mt-20">
+                            <div class="card">
+                                <div class="card__content">
+                                    <div class="card__title">Departmental Exam</div>
+                                    <div class="container">
+                                        <div class="wrapper-content">
+                                            <h5> જા.ક્ર. ૧૮૭/૨૦૨૦-૨૧, સબ ઈન્સ્પેક્ટર ઈન્સ્ટ્રક્ટર, વર્ગ-૩</h5>
+                                            <ul class="sessions">
+                                                <li>
+                                                    <div class="time">12/10/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Notification
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">21/10/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">28/12/2022</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Revised Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">16/01/2023</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Examination Rules
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">18/01/2023</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Revised-Examination Schedule
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <div class="time">18/02/2023</div>
+                                                    <a href="https://gsssb.gujarat.gov.in/Portal/News/63_1_186_Jumbling%20Index%20for%20GIK_.pdf"
+                                                       target="_BLANK" title="">
+                                                        Provisional Answer Key
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="@Href("~/Users/js/Index.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+    <script>
+
+        var pagename = '@ViewBag.pagename';
+    </script>
+
+}

@@ -1,0 +1,157 @@
+﻿@model CommonCMS.Webs.Models.UserMasterFormModel
+
+@{
+    ViewData["Title"] = "User Master";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    var rightsModel = Functions.GetPageRightsCheck(Context.Session);
+}
+
+
+<section class="basic-elements">
+    <div class="row">
+
+        <input type="hidden" id="frmPageUpdate" value="@rightsModel.Update.ToString().ToLower()" />
+        <input type="hidden" id="frmPageDelete" value="@rightsModel.Delete.ToString().ToLower()" />
+
+        <div class="col-md-12">
+            <div class="card card-outline-primary">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                @if (rightsModel.Insert)
+                                {
+                                    <button type="button" class="btn btn-outline-primary btn-round mr-2" id="btnAddNew">
+                                        <i class="fa fa-plus mr-1"></i>Add New User
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered text-center w-100 display nowrap scroll-horizontal" id="tbldata">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>User Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile No</th>
+                                            <th>Role Name</th>
+                                            <th>Is Password Reset</th>
+                                            <th>Is Active</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+
+    <script src="/js/PageDetails/UserDetailMaster/UserMaster.js?dt=@DateTime.Now.ToString("ddMMyyyyfffttfff")"></script>
+
+<!-- Modal -->
+<div class="modal fade text-left" id="mdlAddNew" role="dialog" aria-labelledby="myModalLabel9" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white" id="myModalLabel9"><i class="fa fa-plus"></i>User Form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="frmAddEdit">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group mt-2">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="control-label">First Name</label>
+                                    <input type="text" asp-for="FirstName" class="form-control border-primary" placeholder="Enter First Name">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="control-label">Last Name</label>
+                                    <input type="text" asp-for="LastName" class="form-control border-primary" placeholder="Enter Last Name">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Username" class="control-label">User Name</label>
+                                    <input type="text" asp-for="Username" class="form-control border-primary" readonly="readonly" placeholder="Enter User Name">
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="UserPassword" class="control-label">User Password</label>
+                                    <input type="password" asp-for="UserPassword" class="form-control border-primary" placeholder="Enter User Password">
+                                    <span asp-validation-for="UserPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label">Email</label>
+                                    <input type="email" asp-for="Email" class="form-control border-primary" placeholder="Enter Email">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="PhoneNo" class="control-label">Mobile No</label>
+                                    <input type="text" asp-for="PhoneNo" class="form-control border-primary" placeholder="Enter Mobile No">
+                                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="RoleId" class="control-label">Role</label>
+
+                                    <select class="form-control" asp-for="RoleId" asp-items="@(new SelectList(Model.RoleList, "Value", "Text"))">
+                                        <option value="">--Select Role--</option>
+                                    </select>
+                                    <span asp-validation-for="RoleId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-1">
+                                <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                                    <input type="checkbox" class="custom-control-input" asp-for="IsActive"/>
+                                    <label class="custom-control-label float-left" for="IsActive">Is Active</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-1">
+                                <div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                                    <input type="checkbox" class="custom-control-input" asp-for="IsPasswordReset"/>
+                                    <label class="custom-control-label float-left" for="IsActive">Is Password reset</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary btn-round" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Close</button>
+                <button type="button" class="btn btn-outline-primary btn-round" id="btnMdlSave"><i class="fa fa-check mr-1"></i>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

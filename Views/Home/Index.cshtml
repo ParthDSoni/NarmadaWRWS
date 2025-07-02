@@ -1,0 +1,345 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+
+}
+<style>
+    /* .sidebar-widget .widget-title {
+        padding-bottom: 31px;
+    } */
+    .fullwidth-wrapper {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding: 0;
+    }
+
+    /* Remove spacing from within slider */
+    #BrandLogos {
+        padding: 0 !important;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .slick_slider .client-box {
+        padding: 0 10px; /* Optional: spacing between logos */
+    }
+  /*   new code  */
+    .featured-thumbnail {
+        height: 250px;
+        overflow: hidden;
+    }
+
+        /* .featured-thumbnail img { */
+        /*     width: 100%; */
+        /*     height: 100%; */
+        /*     object-fit: cover; */
+        /*     display: block; */
+        /* } */
+
+        .featured-thumbnail img {
+            width: 100%;
+            height: 250px;
+            object-fit: fill;
+            display: block;
+        }
+
+    #Schemes .slick-slide {
+         /* ✅ Adjust space here (10px left + 10px right = 20px total gap) */
+        box-sizing: border-box;
+        margin:0px 10px;
+    }
+</style>
+
+
+<!-- Banner -->
+<div class="banner_slider_wrapper">
+    <div class="banner_slider banner_slider_1" id="Banners">
+    </div>
+</div>
+<!-- Banner end-->
+<!--about-section-->
+<section class="ttm-row about-section clearfix" id="skipdata">
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-4 col-md-7 col-sm-8" id="dvminister">
+                
+            </div>
+            <div class="col-lg-8" id="divWelComeNote">
+            </div>
+        </div><!-- row end -->
+    </div>
+</section>
+<!--about-section end-->
+<!--service-section-->
+@*  add new code  *@
+<section class="ttm-row service-section ttm-bgcolor-grey clearfix">
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- section-title -->
+                <div class="section-title title-style-center_text">
+                    <div class="title-header">
+                        <h2 class="title">Schemes</h2>
+                    </div>
+                </div><!-- section-title end -->
+            </div>
+        </div>
+        <!-- row end -->
+        <!-- Slider container: no data-slick attribute -->
+        <div class="slick_slider" id="Schemes">
+            <!-- Slides will be dynamically injected here -->
+        </div><!-- slider container end -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin_top30 res-991-margin_bottom0 text-center">
+                    <strong>
+                        <a class="ttm-btn btn-inline ttm-icon-btn-right ttm-btn-color-dark text-capitalize"
+                           href="@Url.Content("/AllSchemes")">View All<i class="fa fa-arrow-circle-right pr-1"></i></a>
+                    </strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--service-section end -->
+<!-- about-section -->
+<section class="ttm-row about-section clearfix news-double">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12">
+                <div class="ttm-bgcolor-grey p-15">
+                    <div class="ttm-tabs ttm-tab-style-02" data-effect="fadeIn">
+                        <ul class="tabs text-center clearfix">
+                            <li class="tab active"><a href="#">News & Updates</a></li>
+                            <li class="tab"><a href="#">Circular / Notifications</a></li>
+                            <li class="tab"><a href="#">Government Resolution</a></li>
+                            <li class="tab"><a href="#">Tenders</a></li>
+                        </ul>
+                        <div class="content-tab">
+
+                            <div class="content-inner active">
+                                <marquee direction="up" scrollamount="4" behavior="scroll"
+                                         onmouseover="this.stop();" onmouseout="this.start();" height="300">
+                                    <ul id="NewsTabContent">
+                                       
+                                    </ul>
+                                </marquee>
+                            </div>
+                            <div class="content-inner">
+                                <marquee direction="up" scrollamount="4" behavior="scroll"
+                                         onmouseover="this.stop();" onmouseout="this.start();" height="300">
+                                    <ul id="CircularTabContent">
+                                      
+                                    </ul>
+                                </marquee>
+                            </div>
+                            <div class="content-inner">
+                                <marquee direction="up" scrollamount="4" behavior="scroll"
+                                         onmouseover="this.stop();" onmouseout="this.start();" height="300">
+                                    <ul id="ResolutionTabContent">
+                                      
+                                    </ul>
+                                </marquee>
+                            </div>
+                            <div class="content-inner">
+                                <marquee direction="up" scrollamount="4" behavior="scroll"
+                                         onmouseover="this.stop();" onmouseout="this.start();" height="300">
+                                    <ul id="TenderTabContent">
+                                      
+                                    </ul>
+                                </marquee>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ttm-row about-section ttm-bgimage-yes bg-img6 ttm-bg ttm-bgcolor-darkgrey z-index_1 mt_100 clearfix">
+    <div class="ttm-row-wrapper-bg-layer ttm-bg-layer"></div>
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- section-title -->
+                <div class="section-title title-style-center_text padding_top100">
+                    <div class="title-header">
+                        <h2 class="title">The Region</h2>
+                    </div>
+
+                </div><!-- section-title end -->
+            </div>
+        </div>
+        <div class="row slick_slider"
+             data-slick='{"slidesToShow": 3, "slidesToScroll": 3, "arrows":false, "autoplay":true, "infinite":true, "responsive": [{"breakpoint":1100,"settings":{"slidesToShow": 3}} , {"breakpoint":940,"settings":{"slidesToShow": 2}}, {"breakpoint":575,"settings":{"slidesToShow": 1}}]}' id="TheRegion">
+        </div>
+     
+</div>
+
+</section>
+<!-- about-section end -->
+<!--procedure-section-->
+<section class="ttm-row procedure-section clearfix">
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- section title -->
+                <div class="section-title title-style-center_text">
+                    <div class="title-header">
+                        <h2 class="title">Data Bank</h2>
+                    </div>
+
+                </div><!-- section title end -->
+            </div>
+        </div>
+        <div class="row mb_15 databank_slider">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <!-- featured-icon-box -->
+                <a class="featured-icon-box icon-align-top-content style1" href="@Url.Content("/Home/WaterResources")">
+                    <div class="featured-icon">
+                        <div class="ttm-icon ttm-icon_element-fill ttm-icon_element-style-rounded ttm-icon_element-color-white ttm-icon_element-size-lg">
+                            <i class="flaticon-ice-fishing"></i>
+                            <div class="ttm-num ttm-bgcolor-skincolor"><span class="number">01</span></div>
+                        </div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-title">
+                            <h3>Water Resources</h3>
+                        </div>
+                    </div>
+                </a><!-- featured-icon-box end-->
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <!-- featured-icon-box -->
+                <a class="featured-icon-box icon-align-top-content style1" href="@Url.Content("/RiverResources")">
+                    <div class="featured-icon">
+                        <div class="ttm-icon ttm-icon_element-fill ttm-icon_element-style-rounded ttm-icon_element-color-white ttm-icon_element-size-lg">
+                            <i class="flaticon-pond"></i>
+                            <div class="ttm-num ttm-bgcolor-skincolor"><span class="number">02</span></div>
+                        </div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-title">
+                            <h3>River Data</h3>
+                        </div>
+                    </div>
+                </a><!-- featured-icon-box end-->
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <!-- featured-icon-box -->
+                <a class="featured-icon-box icon-align-top-content style1" href="@Url.Content("/DamResources")">
+                    <div class="featured-icon">
+                        <div class="ttm-icon ttm-icon_element-fill ttm-icon_element-style-rounded ttm-icon_element-color-white ttm-icon_element-size-lg">
+                            <i class="flaticon-lake-1"></i>
+                            <div class="ttm-num ttm-bgcolor-skincolor"><span class="number">03</span></div>
+                        </div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-title">
+                            <h3>Dams And Canals</h3>
+                        </div>
+                    </div>
+                </a><!-- featured-icon-box end-->
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <!-- featured-icon-box -->
+                <a class="featured-icon-box icon-align-top-content style1" href="@Url.Content("/CanalResources")">
+                    <div class="featured-icon">
+                        <div class="ttm-icon ttm-icon_element-fill ttm-icon_element-style-rounded ttm-icon_element-color-white ttm-icon_element-size-lg">
+                            <i class="flaticon-placeholder"></i>
+                            <div class="ttm-num ttm-bgcolor-skincolor"><span class="number">04</span></div>
+                        </div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-title">
+                            <h3>Canals And Command Area</h3>
+                        </div>
+                    </div>
+                </a><!-- featured-icon-box end-->
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <!-- featured-icon-box -->
+                <a class="featured-icon-box icon-align-top-content style1" href="@Url.Content("/Home/ReservoirWaterOperation")">
+                    <div class="featured-icon">
+                        <div class="ttm-icon ttm-icon_element-fill ttm-icon_element-style-rounded ttm-icon_element-color-white ttm-icon_element-size-lg">
+                            <i class="flaticon-placeholder"></i>
+                            <div class="ttm-num ttm-bgcolor-skincolor"><span class="number">05</span></div>
+                        </div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-title">
+                            <h3>Reservoir Water Operation</h3>
+                        </div>
+                    </div>
+                </a><!-- featured-icon-box end-->
+            </div>
+        </div>
+    </div>
+</section>
+<!--procedure-section end-->
+
+
+<!--procedure-section-->
+<section class="ttm-row procedure-section clearfix ttm-bgcolor-grey">
+    <div class="container" id="GalleryTemplate">
+        <!-- row -->
+
+
+    </div>
+</section>
+<!--procedure-section end-->
+
+
+
+
+<!-- padding_bottom_zero-section -->
+<section class="ttm-row padding_bottom_zero-section clearfix" style="padding: 0; margin: 0;">
+   
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+        <div class="slick_slider" id="BrandLogos">
+            <!-- Injected logos will go here -->
+        </div>
+        </div>
+            </div>
+        </div>
+   
+</section>
+
+
+
+<!-- Logo -->
+<!-- End Logo -->
+
+@section Scripts {
+        
+    <script src="@Href("~/ui/js/PageDetails/Index.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+    <script src="@Href("~/Admin/js/PageDetails/FrontGallery/Album.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+
+}

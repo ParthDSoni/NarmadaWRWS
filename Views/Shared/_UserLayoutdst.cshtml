@@ -1,0 +1,359 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor HttpContextAccessor;
+    @using System.Text.Json;
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null || LangId == 0)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+        throw;
+    }
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Narmada Water Resource, Water Supply and Kalpsar Department">
+    <meta name="description" content="Narmada Water Resource, Water Supply and Kalpsar Department">
+    <meta name="author" content="Narmada Water Resource, Water Supply and Kalpsar Department" />
+
+    <title>Narmada Water Resource, Water Supply and Kalpsar Department</title>
+
+    <link rel="icon" href="@Href("~/ui/images/favicon.png")" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/animate.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/font-awesome.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/all.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/flaticon.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/themify-icons.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/slick.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/prettyPhoto.css")">
+
+    @* <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/global.css")" /> *@
+    @{
+        var getAllCssData = Functions.CSSMasterDomain(Url);
+        if (!string.IsNullOrWhiteSpace(getAllCssData))
+        {
+            @Html.Raw(getAllCssData)
+        }
+    }
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/megamenu.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Admin/vendors/css/sweetalert2.min.css?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))">
+    @* <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/jquery.fancybox.min.css")"> *@
+    <link rel="stylesheet" type="text/css" href="@Href("~/ui/css/fancybox.css")">
+    <script>
+        var baseUrl = "@Url.Content("~/")";
+    </script>
+
+</head>
+<!-- <link rel="stylesheet" type="text/css" href="css/font-awesome.css" /> -->
+
+
+
+
+
+<body class="theme-light">
+    <!--page start-->
+    <div class="page">
+        <!-- Modal -->
+        <!-- Modal -->
+        <!-- Modal -->
+        <!-- Modal -->
+   
+        <!-- Modal -->
+        <div class="modal fade" id="mdlFront" data-bs-backdrop="false" aria-labelledby="myModalLabel9" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+@*                         <h5 class="modal-title" id="myModalLabel9">Popup Details</h5>
+ *@                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body" tabindex="1" id="DivDescriptionPopup" >
+                        <!-- AJAX content goes here -->
+                    </div>
+
+
+                    @* <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div> *@
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+     
+        <!-- <div id="preloader" class="blobs-wrapper">
+            <div class="ttm-bgcolor-skincolor loader-blob"></div>
+        </div> -->
+        <!--header start-->
+        <header id="masthead" class="header ttm-header-style-01">
+
+            <!-- topbar -->
+            <div class=" ttm-bgcolor-darkgrey text-center clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <ul class="top-content">
+                                <li>
+                                    <div class="rs-toolbar-left">
+                                        <a href="@Href("~/Home/ScreenReaderAccess")" id="ScreenReader">
+                                            <i class="fa-solid fa-desktop"></i>Screen Reader
+                                            Access
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="rs-toolbar-left">
+                                        <i class="fa fa-forward"></i>
+                                        <a href="#skipdata" id="Skiptomain">
+                                            Skip to main Content
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="rs-toolbar-right">
+                                        <div class="toolbar-share-icon" id="dvHeadermenu">
+                                        </div>
+                                    </div>
+                                </li>
+                                @* <li>
+                                    <div class="rs-toolbar-right">
+                                        <div class="ltn__social-media_font">
+                                            <ul class="links clearfix">
+                                                <li>
+                                                    <a href="#" title="Text Size Decrease" id="btn-decrease"
+                                                       class="fonts_img ">A-</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" title="Text Size Normal" id="btn-orig"
+                                                       class="fonts_img ">A</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" title="Text Size Increase" id="btn-increase"
+                                                       class="fonts_img ">A+</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li> *@
+                               @*  <li>
+                                    <div class="rs-toolbar-right">
+                                        <div class="ltn__social-media_size">
+                                            <ul class="links clearfix">
+                                                <li>
+                                                    <a href="#" class="theme-icon" id="dark-theme" title="Drak Mode">
+                                                        <i class="fas fa-moon"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="theme-icon" id="light-theme"
+                                                       title="Default Mode"><i class="fas fa-sun"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li> *@
+                                <li>
+                                    <div class="rs-toolbar-right">
+                                        <div class="toolbar-share-icon">
+                                            <div class="side-nav">
+                                                <div class="dropdown nav-flag-dropdown">
+                                                    <select class="goog-te-combo" id="langId" name="langId">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_extra d-flex flex-row align-items-center ms-auto">
+                                        <div class="header_search">
+                                            <a href="#" class="btn-default search_btn ttm-bgcolor-skincolor">
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                            <div class="header_search_content">
+                                                <div class="header_search_content_inner">
+                                                    <a href="#" class="close_btn"><i class="ti ti-close"></i></a>
+                                                    <p class="margin_bottom20">What are you looking for?</p>
+                                                    <form id="searchbox" method="get" action="#">
+                                                        <input class="search_query" type="text" id="search_query_top"
+                                                               name="s" placeholder="Enter Keyword" value="">
+                                                        <button type="submit" class="btn close-search">
+                                                            <i class="ti ti-search"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- topbar end -->
+            @Html.AntiForgeryToken()
+            <input id="lgLanguageId" value="@LangId" type="hidden" />
+            <div class="ttm-widget_header ttm-bgcolor-grey" id="Dvmainlogo">
+            </div>
+            <!-- site-header-menu -->
+            <div id="site-header-menu" class="site-header-menu">
+                <div class="site-header-menu-inner ttm-stickable-header">
+                    <div class="container-fluid">
+                        <div class="site-navigation d-flex align-items-center justify-content-between">
+                            <div class="border-box-block">
+                                <div class="ffds">
+                                    <div class="btn-show-menu-mobile menubar menubar--squeeze">
+                                        <span class="menubar-box">
+                                            <span class="menubar-inner"></span>
+                                        </span>
+                                    </div>
+                                    <!-- menu -->
+                                    <nav class="main-menu menu-mobile" id="menu">
+                                        <ul class="menu">
+                                            @{
+                                                var stringData = Functions.CreateMainUserLayoutMenu(Url, Context.Request.Path.Value.ToString(), LangId);
+                                                if (!string.IsNullOrWhiteSpace(stringData))
+                                                {
+                                                    @Html.Raw(stringData)
+                                                }
+                                            }
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- site-header-menu end-->
+        </header>
+        <!--header end-->
+
+        <!--site-main start-->
+        <div class="site-main">
+            @RenderBody()
+        </div>
+        <!--site-main end-->
+
+        <!--footer start-->
+        <footer class="footer widget-footer ttm-bgcolor-darkgrey ttm-textcolor-white clearfix">
+            <div class="second-footer" id="dvFooter">
+            </div>
+            <div class="bottom-footer-text copyright">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="d-md-flex justify-content-between">
+                                <span class="cpy-text">
+                                    Copyright © 2024 <a href="#"
+                                                        class="ttm-textcolor-skincolor font-weight-500">NWRWS</a>
+                                    All rights reserved.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="footer-cont footer-logo text-center">
+                                <span>
+                                    @{
+                                        var UpdateDate = Functions.UpdateDate();
+                                        if (!string.IsNullOrWhiteSpace(UpdateDate))
+                                        {
+                                            @Html.Raw(UpdateDate)
+                                        }
+                                    }
+                                </span>
+                                <span> Total Visitors :&nbsp;<label id="CounterVisitor"></label></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="text-md-right">
+                                <span>
+                                    Design &amp; Developed By &nbsp;<a href="#">Gujarat Informatics Limited</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--footer end-->
+        <!--back-to-top start-->
+        <a id="totop" href="#top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!--back-to-top end-->
+
+    </div><!-- page end -->
+    <!-- Javascript -->
+    <script src="@Href("~/ui/js/jquery-3.7.1.min.js")"></script>
+    <script src="@Href("~/ui/js/jquery-migrate-3.4.1.min.js")"></script>
+    <script src="@Href("~/ui/js/bootstrap.min.js")"></script>
+    <script src="@Href("~/ui/js/jquery.easing.js")"></script>
+    <script src="@Href("~/ui/js/jquery-waypoints.js")"></script>
+    <script src="@Href("~/ui/js/jquery-validate.js")"></script>
+    <script src="@Href("~/ui/js/jquery.prettyPhoto.js")"></script>
+    <script src="@Href("~/ui/js/slick.min.js")"></script>
+    <script src="@Href("~/ui/js/numinate.min.js")"></script>
+    <script src="@Href("~/ui/js/imagesloaded.min.js")"></script>
+    <script src="@Href("~/ui/js/jquery-isotope.js")"></script>
+    <script src="@Href("~/ui/js/main.js")"></script>
+    <script src="@Href("~/ui/js/themejs.js")"></script>
+@*     <script src="@Href("~/Admin/js/jquery.fancybox.min.js")"></script> *@
+@*     <script src="Grit_ui/js/fancybox.umd.js"></script> *@
+    <script src="@Href("~/ui/js/fancybox.umd.js")"></script>
+    <!-- Javascript end-->
+    <!-- Javascript Common -->
+    <script src="@Href("~/Admin/js/Secure/aes.js")"></script>
+    <script src="@Href("~/Admin/js/Secure/hash.js")"></script>
+    <script src="@Href("~/Admin/js/Common.js?dt="+@DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+    <script src="@Href("~/ui/js/PageDetails/MainLayoutModule.js")"></script>
+    <script src="@Href("~/Admin/vendors/js/sweetalert2.min.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+    <!-- Bootstrap 5 CSS -->
+    @* <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ *@
+    <!-- Javascript Common -->
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        function GetSearch() {
+            var serchtext = $('#txtGlobalSearch').val();
+            window.location.replace(ResolveUrl("/Search?serch=" + serchtext));
+        }
+    </script>
+</body>
+
+</html>
+
+<script>
+            document.getElementById('Skiptomain').addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById('skipdata');
+        var headerOffset = 80; // height of fixed header
+        var elementPosition = target.getBoundingClientRect().top;
+        var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    });
+</script>

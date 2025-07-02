@@ -1,0 +1,15 @@
+﻿@model NWRWS.Model.Service.PressTempModel
+@{
+    ViewData["Title"] = "Press Release";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@Html.Partial("~/Views/Shared/_PressReleasePartial.cshtml");
+<input type="hidden" asp-for="Id" />
+<input type="hidden" asp-for="PressId" />
+<input type="hidden" asp-for="DepId"/>
+<input type="hidden" asp-for="DistrictId" />
+<input type="hidden" asp-for="lglaluId" />
+<!-- main-page end-->
+@section Scripts {
+    <script src="@Href("~/ui/js/PageDetails/PressReleaseDetails.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}

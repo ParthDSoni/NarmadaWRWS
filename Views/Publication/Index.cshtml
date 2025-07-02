@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@{
+    ViewData["Title"] = "Publications";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+<!-- page-title -->
+<div class="ttm-page-title-row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-box text-left">
+                    <div class="breadcrumb-wrapper">
+                        @{
+                            var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                            if (!string.IsNullOrWhiteSpace(stringData))
+                            {
+                                @Html.Raw(stringData)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-title end-->
+<!-- main-page start-->
+<div class="site-main">
+    <!-- sidebar -->
+    <div class="sidebar ttm-sidebar ttm-bgcolor-white clearfix">
+        <div class="container">
+            <div class="row news_new" id="publicationDiv">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main-page end-->
+<!-- pagination-start -->
+<div class="row pagination">
+    <div class="col-md-12">
+        <div class="pagenum">
+            <ul id="PaginationPublication">
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- pagination-end -->
+<input type="hidden" name="PublicationTypeId" id="PublicationTypeId" value="@ViewBag.PublicationTypeId" />
+@section Scripts {
+    <script src="@Href("~/ui/js/PageDetails/Publication.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}

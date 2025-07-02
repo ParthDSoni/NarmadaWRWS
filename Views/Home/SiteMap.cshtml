@@ -1,0 +1,63 @@
+﻿
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@{
+    ViewData["Title"] = "SiteMap ";
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+
+<!--sub-Banner-start-->
+<!-- Page Title -->
+<div class="page-title style-two">
+    <div class="container">
+        <div class="content-box">
+            @{
+                var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                if (!string.IsNullOrWhiteSpace(stringData))
+                {
+                    @Html.Raw(stringData)
+                }
+            }
+            @* <ul class="bread-crumb clearfix">
+            <li>You are here :</li>
+            <li><a href="@Url.Content("~/Home/Index")">Home</a></li>
+            <li><i class="fas fa-angle-right"></i></li>
+            <li>Photo Gallery</li>
+            </ul>*@
+        </div>
+    </div>
+</div>
+@Html.AntiForgeryToken()
+<!-- End Page Title -->
+<!--Changing -End-->
+<div class="ltn__gallery-area mb-50 mt-5">
+    <div class="container">
+        <!--Portfolio Wrapper Start-->
+
+        <div class="row" id="dvSiteMapMenuFooter">
+            
+        </div>
+    </div>
+    <!-- Gallery area end -->
+</div>
+<!-- End Blog Details -->
+@section Scripts {
+    <script src="@Href("~/ui/js/SiteMap.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+
+}

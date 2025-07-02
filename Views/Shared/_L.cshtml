@@ -1,0 +1,133 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor HttpContextAccessor;
+    @using System.Text.Json;
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null || LangId == 0)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="HTML5">
+    <meta name="description" content="Agriculture">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    @* <title>Directorate of Information</title> *@
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" href="@Href("~/ui/images/favicon.png")" type="image/x-icon">
+
+    <style>
+        .newmodaldata .btn-close {
+            background: url('@Href("~/Admin/images/close.png")');
+        }
+    </style>
+
+    <!-- Font Icons css -->
+    <link rel="shortcut icon" href="@Href("~/ui/images/favicon.png")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/animate.css")">
+    @*<link rel="stylesheet" type="text/css" href="@Href("~/Users/css/slick.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/slick-theme.css")">*@
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/font-awesome.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/themify-icons.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/flaticon.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/owl.carousel.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/revolution/css/rs6.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Users/css/jquery.fancybox.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Href("~/Admin/vendors/css/sweetalert2.min.css?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))">
+    @{
+        var getAllCssData = Functions.CSSMasterDomain(Url);
+        if (!string.IsNullOrWhiteSpace(getAllCssData))
+        {
+            @Html.Raw(getAllCssData)
+        }
+    } 
+    <script>
+        var baseUrl = "@Url.Content("~/")";
+    </script>
+
+</head>
+
+<body>
+
+    <!--page start-->
+    <div class="page">
+
+        <!-- preloader start -->
+        <div id="preloader">
+            <div id="status">&nbsp;</div>
+        </div>
+        <!-- preloader end -->
+
+        <iframe id="printFrame" style="display: none;"></iframe>
+
+        @RenderBody()
+
+    </div><!-- page end -->
+    <!-- Javascript -->
+
+    <script src="@Href("~/Users/js/jquery.js")"></script>
+    <script src="@Href("~/Users/js/tether.min.js")"></script>
+    <script src="@Href("~/Users/js/bootstrap.min.js")"></script>
+    <script src="@Href("~/Users/js/owl.carousel.min.js")"></script>
+    <script src="@Href("~/Users/js/jquery.easing.js")"></script>
+    @*<script src="@Href("~/Users/js/jquery-waypoints.js")"></script>
+    <script src="@Href("~/Users/js/jquery.counterup.min.js")"></script>
+    <script src="@Href("~/Users/js/slick.js")"></script>
+    <script src="@Href("~/Users/js/slick.min.js")"></script>*@
+    <script src="@Href("~/Users/js/jquery.fancybox.min.js")"></script>
+    <script src="@Href("~/Users/js/main.js")"></script>
+    <script src="@Href("~/Users/js/themejs.js")"></script>
+    <script src="@Href("~/Admin/js/Secure/aes.js")"></script>
+    <script src="@Href("~/Admin/js/Secure/hash.js")"></script>
+    <!-- Revolution Slider -->
+    @* <script src="@Href("~/Users/revolution/js/slider.js")"></script> *@
+    <script src="@Href("~/Users/revolution/js/revolution.tools.min.js")"></script>
+    <script src="@Href("~/Users/revolution/js/rs6.min.js")"></script>
+    <script src="@Href("~/Admin/js/Common.js?dt="+@DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+    <script src="@Href("~/Users/js/PageDetails/MainLayoutModule.js")"></script>
+    <script src="@Href("~/Admin/vendors/js/sweetalert2.min.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+
+    <script>
+        var regexGlobalValidation = new RegExp(htmlDecode("@Functions.regGlobalValidation"));
+        var regexName = new RegExp(htmlDecode("@Functions.regName"));
+        var regexMobileNo = new RegExp(htmlDecode("@Functions.regMobileNo"));
+        var regexPincode = new RegExp(htmlDecode("@Functions.regPincode"));
+        var regexNumber = new RegExp(htmlDecode("@Functions.regNumber"));
+        var regexEmail = new RegExp(htmlDecode("@Functions.regEmail"));
+        var regexPassword = new RegExp(htmlDecode("@Functions.regPassword"));
+        var regexURL = new RegExp(htmlDecode("@Functions.regURL"));
+        var dateFormat = '@Functions.dateFormat';
+        var allowModalOutsideClick = @Functions.allowModalOutsideClick.ToString().ToLower();
+        var allowKeyboardInputOnTime = @Functions.allowKeyboardInputOnTime.ToString().ToLower();
+        var allowKeyboardInputOnDate = @Functions.allowKeyboardInputOnDate.ToString().ToLower();
+        var allowInspectElement = @Functions.allowInspectElement.ToString().ToLower();
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        function GetSearch() {
+            var serchtext = $('#txtGlobalSearch').val();
+            window.location.replace(ResolveUrl("/Search?serch=" + serchtext));
+        }
+    </script>
+
+</body>
+
+</html>

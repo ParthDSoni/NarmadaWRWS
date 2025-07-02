@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Department Press Release";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@Html.Partial("~/Views/Shared/_PressReleasePartial.cshtml");
+<!-- main-page end-->
+@section Scripts {
+    <script src="@Href("~/ui/js/PageDetails/DepartmentPressRelease.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}

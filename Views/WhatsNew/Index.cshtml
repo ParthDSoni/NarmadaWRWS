@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@{
+    ViewData["Title"] = "Latest News";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+<!-- page-title -->
+<div class="ttm-page-title-row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-box text-left">
+                    <div class="breadcrumb-wrapper">
+                         @{
+                        var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                        if (!string.IsNullOrWhiteSpace(stringData))
+                        {
+                        @Html.Raw(stringData)
+                        }
+                        }
+                        @*<span>
+                            <a title="Homepage" href="/Index"><i class="ti ti-home"></i>&nbsp;&nbsp;Home</a>
+                        </span>*@
+                        <span class="ttm-bread-sep ttm-textcolor-white">&nbsp; → &nbsp;</span>
+                        <span class="ttm-textcolor-skincolor">Latest News</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-title end-->
+<!--site-main start-->
+<div class="site-main">
+    <!-- sidebar -->
+    <div class="sidebar ttm-sidebar ttm-bgcolor-white clearfix mt-30 mb-30">
+        <div class="container">
+            <div class="schemestab table-responsive">
+                <table class="table table-striped table-bordered css-serial">
+                    <thead>
+                        @if (LangId == 1)
+                        {
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Details/Subject</th>
+                                <th>Date</th>
+                                <th>Document</th>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <th>ક્રમ.નં.</th>
+                                <th>વિગતો/વિષય</th>
+                                <th>તારીખ</th>
+                                <th>દસ્તાવેજ</th>
+                            </tr>
+                        }
+                    </thead>
+
+                    <tbody id="tbodyDV">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="@Href("~/Users/js/WhatsNew.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}

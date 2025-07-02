@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@model CMSMenuMasterModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+
+<!--Page Title-->
+<div class="ttm-page-title-row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-box text-left">
+                    <div class="breadcrumb-wrapper">
+                        @{
+                            var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                            if (!string.IsNullOrWhiteSpace(stringData))
+                            {
+                                @Html.Raw(stringData)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Page Title-->
+<!-- service-details -->
+<div class="site-main pt-50 pb-50">
+            <div class="sidebar ttm-sidebar ttm-bgcolor-white clearfix">
+                <div class="container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9 content-area">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered data-count">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No</th>
+                                                <th>Title</th>
+                                                <th>Download</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyDV">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 widget-area widget contact-widget ">
+                            @{
+                                var stringQuiData = Functions.GetQuickLink(Url, Context, LangId);
+                                if (!string.IsNullOrWhiteSpace(stringQuiData))
+                                {
+                                    @Html.Raw(stringQuiData)
+                                }
+                            }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- service-details end -->
+@section Scripts {
+    <script src="@Href("~/ui/js/RTI.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}
