@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+    <title>PH Candidate Details</title>
+    <style type="text/css">
+        .clear {
+            display: block;
+            clear: both;
+        }
+
+        .mx-auto {
+            margin: 0 auto;
+        }
+
+        .text-beta {
+            color: #2b7a78;
+        }
+
+        .text-gamma {
+            color: #3aafa9;
+        }
+
+        .bg-delta {
+            background-color: #def2f1;
+        }
+
+        .border-delta {
+            border: solid 1px #def2f1;
+        }
+
+        .weight-medium {
+            font-weight: 500;
+        }
+
+        .weight-semi-bold {
+            font-weight: 600;
+        }
+
+        .weight-bold {
+            font-weight: 700;
+        }
+
+        .text-sm {
+            font-size: 15px;
+        }
+
+        .text-md {
+            font-size: 17px;
+        }
+
+        .text-lg {
+            font-size: 19px;
+        }
+
+        .email, .email-subject {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 400;
+            margin: 2rem;
+        }
+
+        .email-container {
+            padding: 20px;
+            color: #17252a;
+            border: solid 1px #2b7a78;
+            border-bottom: none;
+            border-radius: 12px 12px 0px 0px;
+        }
+
+        .page-header {
+            border-radius: 24px;
+            padding: 5px 0px;
+        }
+
+        .page-header-text {
+            line-height: 31px;
+            text-align: center;
+        }
+
+        .footer-hr-p {
+            border-top: solid 5px #2b7a78;
+        }
+
+        .footer-hr-s {
+            border-top: solid 5px #3aafa9;
+        }
+
+        .footer-desc {
+            background-color: #def2f1;
+            padding: 14px;
+            text-align: center;
+            border-radius: 0px 0px 12px 12px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+    <!-- DO NOT INCLUDE BELOW CODE WITH EMAIL TEMPLATE -->
+    <h3 class="email-subject text-lg"><strong>Email Subject:</strong> PH Candidate Details</h3>
+    <!-- DO NOT INCLUDE ABOVE CODE WITH EMAIL TEMPLATE -->
+
+
+    <section class="email">
+        <div class="email-container mx-auto">
+            <div class="page-header bg-delta border-delta">
+                <div class="page-header-text weight-semi-bold text-beta text-lg">PH Candidate Details </div>
+            </div> <!-- page-header ends -->
+            <p class="text-md">Dear <b>User</b>&nbsp;,</p>
+            <p class="text-md">Your FullName is <b>{{FullName}}</b><br></p>
+            <p class="text-md">Your Exam type is <b>{{Examtype}}</b><br></p>
+            <p class="text-md">Your AdvertisementNo is <b>{{AdvertisementNo}}</b><br></p>
+            <p class="text-md">Your Date Of Birth is <b>{{DateOfBirth}}</b><br></p>
+            <p class="text-md">Your MobileNo is <b>{{MobileNo}}</b><br></p>
+            <p class="text-md">Your RollNo is <b>{{RollNo}}</b><br></p>
+            <p class="text-md">This is System Generated Email<br></p>
+            <p class="text-md"><br><br><span>Thanks.</span></p>
+        </div> <!-- email-container ends -->
+        <!-- -----*----- Email Footer -----*----- -->
+        <div class="footer-hr-p mx-auto"></div>
+        <div class="footer-hr-s mx-auto"></div>
+        <div class="footer-desc text-gamma text-sm mx-auto">&copy; GIL. All Rights Reserved.</div>
+    </section> <!-- email ends -->
+</body>
+</html>

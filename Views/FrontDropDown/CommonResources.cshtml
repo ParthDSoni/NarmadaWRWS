@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_CommonPartial.cshtml")
+
+@section Scripts {
+    <script src="@Href("~/ui/js/PageDetails/Dam.js?dt=" + DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+    <script src="@Href("~/ui/js/PageDetails/" + ViewData["ScriptFile"] + "?dt=" + DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}

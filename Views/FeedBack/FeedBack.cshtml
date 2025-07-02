@@ -1,0 +1,175 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using System.Text.Json;
+@model Feedback
+@{
+    ViewData["Title"] = "Contact US";
+    Layout = "~/Views/Shared/_UserLayoutdst.cshtml";
+
+    long LangId = 1;
+    try
+    {
+        LangId = (HttpContextAccessor.HttpContext.Session.Get("LanguageId") == null ? default(long) :
+        JsonSerializer.Deserialize<long>(HttpContextAccessor.HttpContext.Session.Get("LanguageId")));
+        if (LangId == null)
+        {
+            NWRWS.Common.SessionWrapper.Set<long>(HttpContextAccessor.HttpContext.Session, "LanguageId", 1);
+            LangId = 1;
+        }
+    }
+    catch
+    {
+    }
+}
+
+<!-- BreadCrumb Start -->
+<div class="ttm-page-title-row ttm-bg ttm-bgimage-yes ttm-bgcolor-darkgrey clearfix">
+    <div class="ttm-row-wrapper-bg-layer ttm-bg-layer"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="ttm-page-title-row-inner">
+                    <div class="breadcrumb-wrapper headersub">
+                        @{
+                            var stringData = Functions.GetPublicBreadcum(Url, Context, LangId);
+                            if (!string.IsNullOrWhiteSpace(stringData))
+                            {
+                                @Html.Raw(stringData)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BreadCrumb End -->
+<!-- Feedback Start -->
+<section class="ttm-row conatct-section ttm-bgcolor-grey clearfix">
+    <div class="container" id="maincontent">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ttm-bgcolor-white p-40 padding_top35 border-rad_5 margin_top15">
+                    <form id="frmAdd" class="request_qoute_form wrap-form clearfix">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" class="form-control" asp-for="hfEmail">
+                        <input type="hidden" class="form-control" asp-for="hxafcaptch">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span class="text-input">
+                                    <input type="text" asp-for="FName"
+                                           placeholder="First Name*" required=""
+                                           aria-required="true" class="form-control" onkeypress="return lettersOnly()">
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-input">
+                                    <input type="text" asp-for="LName"
+                                           placeholder="Enter Last Name Here" required=""
+                                           aria-required="true" class="form-control" onkeypress="return lettersOnly()">
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-input">
+                                    <input type="email" asp-for="Email"
+                                           placeholder="Enter Your Email Address" required=""
+                                           aria-required="true" class="form-control">
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-input">
+                                    <input type="text" asp-for="PhoneNo"
+                                           placeholder="Enter Your Mobile Number" required=""
+                                           aria-required="true" class="form-control" onkeypress="return isNumberKey(event)" maxlength="10">
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-input">
+                                    <input type="text" asp-for="Zip"
+                                           placeholder="Enter Your Zipcode" required=""
+                                           aria-required="true" class="form-control" maxlength="6" onkeypress="return isNumberKey(event)">
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-input">
+                                    <input type="text" asp-for="Subject"
+                                           placeholder="Enter Your Subject" required=""
+                                           aria-required="true" class="form-control" maxlength="50">
+                                </span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-input mb-4">
+                                    <select asp-for="Country" id="Country" name="Country" class="form-select">
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="col-md-4" id="dvState">
+                                <span class="text-input mb-4">
+                                    <select asp-for="State" id="State" name="State" class="form-select">
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="col-md-4" id="dvStateName" hidden>
+                                <span class="text-input">
+                                    <input asp-for="StateName" placeholder="Enter Your State" id="StateName" name="StateName" type="text" />
+                                </span>
+                            </div>
+                            <div class="col-md-4" id="dvCity">
+                                <span class="text-input mb-4">
+                                    <select asp-for="City" id="City" name="City" class="form-select">
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="col-md-4" id="dvCityName" hidden>
+                                <span class="text-input mb-4">
+                                    <input asp-for="CityName" placeholder="Enter Your City" id="CityName" name="CityName" type="text" />
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="text-input">
+                                    <textarea asp-for="Address" placeholder="Address goes here"
+                                               rows="4"></textarea>
+                                </span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="text-input">
+                                    <textarea asp-for="FeedbackDetails" placeholder="Comments/Queries"
+                                               rows="5"></textarea>
+                                </span>
+                            </div>
+                            <div class="col-5 mx-auto d-flex justify-content-center" id="Capcthadiv">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="form-group mb-0 mr-3">
+                                        <img id="imgCapcha" class="img-fluid">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <button type="button" class="btn-three" onclick="return resetCaptchaImage();">
+                                            <i class="fas fa-sync"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-group mb-0 ml-3">
+                                        <span class="text-input">
+                                            <input type="text" tabindex="0" class="form-control mb-0" id="Captcha" name="Captcha" placeholder="Captcha" required>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 feedback d-flex justify-content-center">
+                                <div class="col-lg-3">
+                                    <button class="submit ttm-btn ttm-btn-size-md ttm-btn-shape-rounded ttm-btn-style-fill ttm-btn-color-skincolor w-100 margin_top5" type="button" id="btnMdlSave">Submit</button>
+                                </div>
+                                <div class="col-lg-3">
+                                    <button class="submit ttm-btn ttm-btn-size-md ttm-btn-shape-rounded ttm-btn-style-fill ttm-btn-color-skincolor w-100 margin_top5" id="SearchClear">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Feedback End-->
+@section Scripts {
+    <script src="@Href("~/ui/js/PageDetails/Feedbacks.js?dt="+DateTime.Now.ToString("ddMMyyyyfffttfff"))"></script>
+}
