@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NWRWS.Common\NWRWS.Common.csproj" />
+    <ProjectReference Include="..\NWRWS.IService\NWRWS.IService.csproj" />
+    <ProjectReference Include="..\NWRWS.Model\NWRWS.Model.csproj" />
+  </ItemGroup>
+
+</Project>
